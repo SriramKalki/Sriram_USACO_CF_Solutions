@@ -1,7 +1,4 @@
-#include <iostream>
 #include <bits/stdc++.h>
-#include <cstdio>
-
 
 using namespace std;
 
@@ -10,39 +7,30 @@ void setIO(string s) {
     freopen((s + ".out").c_str(), "w", stdout);
 }
 
-
 int main(){
     setIO("diamond");
     int n,k;
     cin >> n >> k;
+
     int array[n];
-    int answer(0),current(1),val;
+
     for(int i=0; i<n; i++){
         cin >> array[i];
-
-
     }
-    sort(array,array+n);
-    for(int i=0; i<n-1; i++){
-        val = array[i];
 
-        for(int j=i+1; j<n; j++){
-            if(array[j] <= val + k){
-                current++;
-            }else{
-                break;
-            }
+    sort(array,array +n);
+    int left(0), right(0);
+    int answer(0);
+    while(right <n){
+        int curr = 0;
 
+        if(array[right] - array[left] <= k){
+            curr = right - left +1;
+            right++;
+        }else left++;
 
-        }
-        answer = max(answer,current);
-        current = 1;
-
-
+        answer = max(curr,answer);
     }
+
     cout << answer;
-
-
-
-
 }
