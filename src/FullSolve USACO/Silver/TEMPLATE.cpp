@@ -5,6 +5,7 @@
 #include <math.h>
 #include <queue>
 
+#define ll long long
 using namespace std;
 
 void setIO(string s) {

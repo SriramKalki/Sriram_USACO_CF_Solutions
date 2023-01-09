@@ -19,25 +19,28 @@ int answer(0);
 void dfs(int currNode){
     vis[currNode] = true;
 
-    answer += (currNode == 0) ? ceil(log2(adj[currNode].size()+1)) : ceil(log2(adj[currNode].size()));
-    answer += (currNode == 0) ? adj[currNode].size() : adj[currNode].size() - 1;
+    int unfilled(0);
 
     for(auto u : adj[currNode]){
-        if(vis[u]) return;
-        dfs(u);
+        if(!vis[u]) unfilled++;
+    }
+    answer += ceil(log2(unfilled+1));
+
+    for(auto u : adj[currNode]){
+        if(!vis[u]) dfs(u);
     }
 }
 int main(){
+
     int n;
 
     cin >> n;
     for(int i=0;i<n-1;i++){
-        int a,b;
-        cin >> a >> b;
-        a--; b--;
+        int a,b; cin >> a >> b; a--; b--;
         adj[a].push_back(b);
         adj[b].push_back(a);
     }
     dfs(0);
+    answer += n-1;
     cout << answer;
 }
