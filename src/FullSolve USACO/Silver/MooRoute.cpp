@@ -19,6 +19,7 @@ int main(){
     int array[n];
     int fmin = INT32_MAX;
     int total = 0;
+    int pos = 0;
     for(int i=0; i<n; i++){
         cin >> array[i];
         total += array[i];
@@ -28,6 +29,7 @@ int main(){
         string curr = i % 2 == 0 ? "R" : "L";
 
         for(int j=0; j<n; j++){
+            pos += curr == "R" ? 1 : -1;
             array[j]--;
             total--;
             cout << curr;
@@ -44,18 +46,26 @@ int main(){
             array[j] -= (fmin - 1);
             j--;
         }
-
+        // i0 j-1
+        //cmp i+1
+        int buffer = pos - (i+1);
+        while(buffer--){
+            total--;
+            cout << "L";
+            pos--;
+        }
         for(int k=0; k < fmin-1; k++){
             right = !right;
             string curr = right ? "R" : "L";
             for(int p1 = i; p1 > j; p1--) {
+                pos += right ? 1 : -1;
                 cout << curr;
                 total--;
             }
 
         }
-        while(total--){cout << "L";}
-
 
     }
+
+    while(total--){cout << "L";}
 }
