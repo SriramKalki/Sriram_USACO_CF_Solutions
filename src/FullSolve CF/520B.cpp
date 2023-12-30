@@ -14,5 +14,19 @@ void setIO(string s) {
 }
 
 int main(){
+    int n,m;
+    cin >> n >> m;
 
+    int answer = 0;
+    //divide by 2 or add 1
+    while(n != m){
+        if(m > n && m % 2 == 0){
+            answer++;
+            m /= 2;
+        }else{
+            answer++;
+            m++;
+        }
+    }
+    cout << answer;
 }
